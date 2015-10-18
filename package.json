@@ -1,0 +1,29 @@
+{
+  "name": "webpack-utf8-bom",
+  "version": "1.0.0",
+  "description": "0.1.0",
+  "main": "webpack-utf8-bom.js",
+  "dependencies": {
+    "webpack": "^1.12.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cqqccqc/webpack-utf8-bom.git"
+  },
+  "keywords": [
+    "webpack",
+    "plugin",
+    "utf8",
+    "bom"
+  ],
+  "author": "cqqccqc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cqqccqc/webpack-utf8-bom/issues"
+  },
+  "homepage": "https://github.com/cqqccqc/webpack-utf8-bom#readme"
+}
