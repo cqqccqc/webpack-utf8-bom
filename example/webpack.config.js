@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-var BomPlugin = require('./webpack-utf8-bom');
+var BomPlugin = require('../webpack-utf8-bom');
 
 var srcPath = './src/';
 var libPath = './node_modules';
