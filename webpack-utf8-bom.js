@@ -1,10 +1,9 @@
 /* global Buffer */
 var fs = require('fs');
 
-function UTF8BOMPlugin(options,custom){
-	this.custom = custom || {
-    add: true
-  };
+function UTF8BOMPlugin(addBOM){
+  
+  this.addBOM = addBOM;
 }
 
 UTF8BOMPlugin.prototype.apply = function(compiler) {
@@ -18,8 +17,8 @@ UTF8BOMPlugin.prototype.apply = function(compiler) {
       }
       
       // Whether add or remove BOM head
-      var isAdd = self.custom.add;
-      console.log(isAdd)
+      var isAdd = self.addBOM;
+      
       var buff = fs.readFileSync(path);
       
       if(isAdd) {
