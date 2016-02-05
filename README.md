@@ -22,8 +22,8 @@ module.exports = {
   ...
   plugins: [
     // Add plugin in plugins list
-    // true for add bom
-    // false for remove bom
+    // true for adding bom
+    // false for removing bom
     new BomPlugin(true)
   ],
 

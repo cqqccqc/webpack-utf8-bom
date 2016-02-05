@@ -4,7 +4,7 @@
   "description": "ADD OR REMOVE BOM FOR WEBPACK",
   "main": "webpack-utf8-bom.js",
   "dependencies": {
-    "webpack": "^1.12.2"
+    "webpack": "^1.12.13"
   },
   "devDependencies": {},
   "scripts": {
