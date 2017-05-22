@@ -34,7 +34,9 @@ UTF8BOMPlugin.prototype.apply = function(compiler) {
         
           var bom = new Buffer([0xEF, 0xBB, 0xBF]);
           buff = bom + buff;
-          fs.writeFile(path, buff.toString(), "utf8");
+          fs.writeFile(path, buff.toString(), "utf8", function(err) {
+            console.error(err);
+          });
           
         }
                 
@@ -45,7 +47,9 @@ UTF8BOMPlugin.prototype.apply = function(compiler) {
           && buff[1].toString(16).toLowerCase() == "bb" 
           && buff[2].toString(16).toLowerCase() == "bf") {          
           buff = buff.slice(3);
-          fs.writeFile(path, buff.toString(), "utf8");
+          fs.writeFile(path, buff.toString(), "utf8", function(err) {
+            console.error(err);
+          });
         }
       }
       
