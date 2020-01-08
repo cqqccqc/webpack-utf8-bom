@@ -11,7 +11,7 @@
     "webpack": "^4.x.x"
   },
   "scripts": {
-    "test": "webpack --config test/webpack.config.js && node test/index.js"
+    "test": "node test/index.js"
   },
   "repository": {
     "type": "git",

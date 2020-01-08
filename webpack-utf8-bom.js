@@ -24,7 +24,7 @@ UTF8BOMPlugin.prototype.apply = function(compiler) {
       let buff = fs.readFileSync(path);
 
       if (this.addBOM) {
-        console.log('add bom: ' + fileName);
+        console.log('[UTF8BOMPlugin] Add BOM: ' + fileName);
         if (
           buff.length < 3 ||
           buff[0].toString(16).toLowerCase() !== 'ef' ||
@@ -33,12 +33,10 @@ UTF8BOMPlugin.prototype.apply = function(compiler) {
         ) {
           const bom = Buffer.from([0xef, 0xbb, 0xbf]);
           buff = bom + buff;
-          fs.writeFile(path, buff.toString(), 'utf8', err => {
-            if (err) throw err;
-          });
+          fs.writeFileSync(path, buff.toString(), 'utf8');
         }
       } else {
-        console.log('remove bom: ' + fileName);
+        console.log('[UTF8BOMPlugin] Remove BOM: ' + fileName);
         if (
           buff.length >= 3 &&
           buff[0].toString(16).toLowerCase() === 'ef' &&
@@ -46,9 +44,7 @@ UTF8BOMPlugin.prototype.apply = function(compiler) {
           buff[2].toString(16).toLowerCase() === 'bf'
         ) {
           buff = buff.slice(3);
-          fs.writeFile(path, buff.toString(), 'utf8', err => {
-            if (err) throw err;
-          });
+          fs.writeFileSync(path, buff.toString(), 'utf8');
         }
       }
     }
