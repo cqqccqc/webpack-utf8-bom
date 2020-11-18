@@ -1,5 +1,6 @@
 /* global Buffer */
 const fs = require('fs');
+const path = require('path');
 
 function UTF8BOMPlugin(addBOM, fileMask) {
   this.fileMask = fileMask || /\.(html|htm|css|js|map)$/;
@@ -7,21 +8,18 @@ function UTF8BOMPlugin(addBOM, fileMask) {
 }
 
 UTF8BOMPlugin.prototype.apply = function(compiler) {
-  compiler.hooks.done.tap('UTF8BOMPlugin', stats => {
+  compiler.hooks.done.tap('UTF8BOMPlugin', (stats) => {
+    const outputPath = stats.compilation.outputOptions.path;
     const files = stats.compilation.assets;
 
-    for (let fileName in files) {
-      const path = files[fileName]['existsAt'];
-
-      if (!path) {
-        return;
-      }
-
+    for (const fileName in files) {
       if (!fileName.match(this.fileMask)) {
         continue;
       }
 
-      let buff = fs.readFileSync(path);
+      const existingFilePath = path.resolve(outputPath, fileName);
+
+      let buff = fs.readFileSync(existingFilePath);
 
       if (this.addBOM) {
         console.log('[UTF8BOMPlugin] Add BOM: ' + fileName);
@@ -33,7 +31,7 @@ UTF8BOMPlugin.prototype.apply = function(compiler) {
         ) {
           const bom = Buffer.from([0xef, 0xbb, 0xbf]);
           buff = bom + buff;
-          fs.writeFileSync(path, buff.toString(), 'utf8');
+          fs.writeFileSync(existingFilePath, buff.toString(), 'utf8');
         }
       } else {
         console.log('[UTF8BOMPlugin] Remove BOM: ' + fileName);
@@ -44,7 +42,7 @@ UTF8BOMPlugin.prototype.apply = function(compiler) {
           buff[2].toString(16).toLowerCase() === 'bf'
         ) {
           buff = buff.slice(3);
-          fs.writeFileSync(path, buff.toString(), 'utf8');
+          fs.writeFileSync(existingFilePath, buff.toString(), 'utf8');
         }
       }
     }
