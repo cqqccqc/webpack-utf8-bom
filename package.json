@@ -1,6 +1,6 @@
 {
   "name": "webpack-utf8-bom",
-  "version": "1.333.0",
+  "version": "1.3.0",
   "description": "ADD OR REMOVE BOM FOR WEBPACK",
   "main": "webpack-utf8-bom.js",
   "devDependencies": {
