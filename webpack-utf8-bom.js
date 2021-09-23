@@ -11,6 +11,7 @@ UTF8BOMPlugin.prototype.apply = function(compiler) {
   compiler.hooks.done.tap('UTF8BOMPlugin', (stats) => {
     const outputPath = stats.compilation.outputOptions.path;
     const files = stats.compilation.assets;
+    const logger = compiler.getInfrastructureLogger('UTF8BOMPlugin');
 
     for (const fileName in files) {
       if (!fileName.match(this.fileMask)) {
@@ -22,7 +23,7 @@ UTF8BOMPlugin.prototype.apply = function(compiler) {
       let buff = fs.readFileSync(existingFilePath);
 
       if (this.addBOM) {
-        console.log('[UTF8BOMPlugin] Add BOM: ' + fileName);
+        logger.log('Add BOM: ' + fileName);
         if (
           buff.length < 3 ||
           buff[0].toString(16).toLowerCase() !== 'ef' ||
@@ -34,7 +35,7 @@ UTF8BOMPlugin.prototype.apply = function(compiler) {
           fs.writeFileSync(existingFilePath, buff.toString(), 'utf8');
         }
       } else {
-        console.log('[UTF8BOMPlugin] Remove BOM: ' + fileName);
+        logger.log('Remove BOM: ' + fileName);
         if (
           buff.length >= 3 &&
           buff[0].toString(16).toLowerCase() === 'ef' &&
