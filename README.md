@@ -1,3 +1,5 @@
+
+
 # webpack-utf8-bom
 
 ADD or REMOVE UTF-8 BOM(byte order mark) for webpack.
@@ -23,3 +25,5 @@ module.exports = {
  // ...
 };
 ```
+
+You can pass an optional second `fileMask` argument to `BomPlugin` to match specific output files (default: `/\.(html|htm|css|js|map)$/`).
